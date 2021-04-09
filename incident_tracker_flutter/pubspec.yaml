@@ -20,10 +20,18 @@ dependencies:
   google_sign_in: ^5.0.1
   kakao_flutter_sdk: ^0.6.0-beta.2
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: NotoSansCJKkr
+      fonts:
+        - asset: assets/fonts/noto_sans_cjk_kr_black.otf
+        - asset: assets/fonts/noto_sans_cjk_kr_bold.otf
+        - asset: assets/fonts/noto_sans_cjk_kr_medium.otf
+    - family: Blanka
+      fonts:
+        - asset: assets/fonts/blanka_regular.otf
