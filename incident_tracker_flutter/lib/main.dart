@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incident_tracker_flutter/src/pages/login_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,7 +7,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Incident Tracker',
+      home: LoginPage(),
     );
   }
 }
