@@ -16,31 +16,33 @@ class LoginPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
-            children: [
-              Spacer(flex: 1),
-              Image.asset('images/incident_tracker_icon.png'),
-              Text(
-                'INCIDENT TRACKER',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Blanka',
-                  fontSize: 35,
-                ),
+          child: SafeArea(
+            child: IntrinsicWidth(
+              child: Column(
+                children: [
+                  Image.asset('images/incident_tracker_icon.png'),
+                  Text(
+                    'INCIDENT TRACKER',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Blanka',
+                      fontSize: 35,
+                    ),
+                  ),
+                  Spacer(),
+                  makeLoginButton(
+                    Colors.yellow,
+                    'images/kakao.png',
+                    "Login with Kakao",
+                  ),
+                  makeLoginButton(
+                    Colors.white,
+                    'images/google.png',
+                    "Sign in with Google",
+                  ),
+                ],
               ),
-              Spacer(flex: 8),
-              makeLoginButton(
-                Colors.yellow,
-                'images/kakao.png',
-                "Login with Kakao",
-              ),
-              makeLoginButton(
-                Colors.white,
-                'images/google.png',
-                "Sign in with Google",
-              ),
-              Spacer(flex: 1),
-            ],
+            ),
           ),
         ),
       ),
@@ -49,6 +51,7 @@ class LoginPage extends StatelessWidget {
 
   Widget makeLoginButton(Color background, String imageAssetPath, String text) {
     return Container(
+      margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
