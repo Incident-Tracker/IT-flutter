@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:incident_tracker_flutter/src/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -33,7 +35,7 @@ class LoginPage extends StatelessWidget {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-
+                      Get.to(HomePage());
                     },
                     child: makeLoginButton(
                       Colors.yellow,
