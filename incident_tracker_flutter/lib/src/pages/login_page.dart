@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -30,15 +31,30 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  makeLoginButton(
-                    Colors.yellow,
-                    'images/kakao.png',
-                    "Login with Kakao",
+                  GestureDetector(
+                    onTap: () {
+
+                    },
+                    child: makeLoginButton(
+                      Colors.yellow,
+                      'images/kakao.png',
+                      "Login with Kakao",
+                    ),
                   ),
-                  makeLoginButton(
-                    Colors.white,
-                    'images/google.png',
-                    "Sign in with Google",
+                  GestureDetector(
+                    onTap: () {
+                      GoogleSignIn(
+                        scopes: [
+                          'email',
+                          'https://www.googleapis.com/auth/contacts.readonly',
+                        ],
+                      ).signIn();
+                    },
+                    child: makeLoginButton(
+                      Colors.white,
+                      'images/google.png',
+                      "Sign in with Google",
+                    ),
                   ),
                 ],
               ),
