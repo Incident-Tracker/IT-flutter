@@ -4,3 +4,7 @@
 *.pbxproj
 
 *.xcworkspacedata
+
+.DS_Store
+
+MyApplication/.idea/
