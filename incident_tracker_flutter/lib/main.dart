@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
       title: 'Incident Tracker',
       home: LoginPage(),
       theme: ThemeData(
-        accentColor: Color(0xFF6B4C4C),
+        accentColor: Color(0xFFB79090),
+        primaryColor: Color(0xFF6B4C4C),
       ),
     );
   }

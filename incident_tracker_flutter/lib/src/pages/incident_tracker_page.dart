@@ -7,11 +7,13 @@ import 'package:incident_tracker_flutter/src/utility/icons/ranking_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/write_post_icons.dart';
 import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart';
 
+import 'home_page.dart';
+
 class IncidentTrackerPage extends StatelessWidget {
   final NavController navController = Get.put(NavController());
 
-  final List<Widget> bodyContent = const [
-    Text("Home1"),
+  final List<Widget> bodyContent = [
+    HomePage(),
     Text("Home2"),
     Text("Home3"),
     Text("Home4"),
@@ -25,7 +27,7 @@ class IncidentTrackerPage extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xff6b4c4c),
+          selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: Colors.black,
           showSelectedLabels: true,
           showUnselectedLabels: true,

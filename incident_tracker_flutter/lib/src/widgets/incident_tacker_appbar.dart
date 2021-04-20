@@ -24,7 +24,7 @@ class IncidentTrackerAppbar extends StatelessWidget implements PreferredSizeWidg
           onPressed: writePost,
           icon: Icon(
             WritePost.edit,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ],
