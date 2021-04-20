@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Incident Tracker',
       home: LoginPage(),
+      theme: ThemeData(
+        accentColor: Color(0xFF6B4C4C),
+      ),
     );
   }
 }
