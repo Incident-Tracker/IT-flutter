@@ -39,3 +39,15 @@ flutter:
     - family: Blanka
       fonts:
         - asset: fonts/blanka_regular.otf
+    - family: WritePost
+      fonts:
+        - asset: fonts/WritePost.ttf
+    - family: Category
+      fonts:
+        - asset: fonts/Category.ttf
+    - family: Ranking
+      fonts:
+        - asset: fonts/Ranking.ttf
+    - family: Profile
+      fonts:
+        - asset: fonts/Profile.ttf
