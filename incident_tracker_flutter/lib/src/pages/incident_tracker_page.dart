@@ -10,7 +10,7 @@ import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart
 import 'home_page.dart';
 
 class IncidentTrackerPage extends StatelessWidget {
-  final NavController navController = Get.put(NavController());
+  final NavController _navController = Get.put(NavController());
 
   final List<Widget> bodyContent = [
     HomePage(),
@@ -23,7 +23,7 @@ class IncidentTrackerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: IncidentTrackerAppbar(),
-      body: Obx(() => bodyContent[navController.selectedIndex]),
+      body: Obx(() => bodyContent[_navController.selectedIndex]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -31,8 +31,8 @@ class IncidentTrackerPage extends StatelessWidget {
           unselectedItemColor: Colors.black,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          onTap: (index) => navController.selectedIndex = index,
-          currentIndex: navController.selectedIndex,
+          onTap: (index) => _navController.selectedIndex = index,
+          currentIndex: _navController.selectedIndex,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),

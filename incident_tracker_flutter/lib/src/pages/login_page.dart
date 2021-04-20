@@ -35,7 +35,11 @@ class LoginPage extends StatelessWidget {
                   Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Get.to(IncidentTrackerPage());
+                      Get.to(
+                        IncidentTrackerPage(),
+                        transition: Transition.rightToLeft,
+                        duration: Duration(seconds: 1),
+                      );
                     },
                     child: makeLoginButton(
                       Colors.yellow,
