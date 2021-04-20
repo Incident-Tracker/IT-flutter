@@ -16,7 +16,7 @@ class IncidentTrackerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Obx(() => bodyContent.elementAt(navController.selectedIndex)),
+      body: Obx(() => bodyContent[navController.selectedIndex]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

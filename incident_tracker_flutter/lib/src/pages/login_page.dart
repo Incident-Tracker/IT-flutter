@@ -44,14 +44,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      GoogleSignIn(
-                        scopes: [
-                          'email',
-                          'https://www.googleapis.com/auth/contacts.readonly',
-                        ],
-                      ).signIn();
-                    },
+                    onTap: () {},
                     child: makeLoginButton(
                       Colors.white,
                       'images/google.png',
