@@ -41,19 +41,14 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Text(
-              "더보기",
-              style: TextStyle(
-                fontSize: 12,
-                fontFamily: "NotoSansCJKkr",
-              ),
-            ),
-            Icon(Icons.keyboard_arrow_right_sharp),
-          ],
+        Text(
+          "더보기",
+          style: TextStyle(
+            fontSize: 12,
+            fontFamily: "NotoSansCJKkr",
+          ),
         ),
+        Icon(Icons.keyboard_arrow_right_sharp),
       ],
     );
   }
