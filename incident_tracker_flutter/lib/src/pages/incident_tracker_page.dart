@@ -9,6 +9,7 @@ import 'package:incident_tracker_flutter/src/utility/icons/write_post_icons.dart
 import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart';
 
 import 'home_page.dart';
+import 'ranking_page.dart';
 
 class IncidentTrackerPage extends StatelessWidget {
   final NavController _navController = Get.put(NavController());
@@ -16,8 +17,8 @@ class IncidentTrackerPage extends StatelessWidget {
   final List<Widget> bodyContent = [
     HomePage(),
     CategoryPage(),
-    Text("Home3"),
-    Text("Home4"),
+    RankingPage(),
+    Container(),
   ];
 
   @override
