@@ -34,7 +34,9 @@ flutter:
     - family: NotoSansCJKkr
       fonts:
         - asset: fonts/noto_sans_cjk_kr_black.otf
+          weight: 400
         - asset: fonts/noto_sans_cjk_kr_bold.otf
+          weight: 700
         - asset: fonts/noto_sans_cjk_kr_medium.otf
     - family: Blanka
       fonts:
