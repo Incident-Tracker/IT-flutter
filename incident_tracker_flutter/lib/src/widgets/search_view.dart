@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/pages/result_page.dart';
 
 class SearchView extends StatelessWidget {
   @override
@@ -25,6 +27,7 @@ class SearchView extends StatelessWidget {
                   ),
                   border: InputBorder.none,
                 ),
+                onSubmitted: (value) => Get.to(() => ResultPage(value, index: 0)),
               ),
             ),
           ),
@@ -33,7 +36,7 @@ class SearchView extends StatelessWidget {
             child: IconButton(
               color: Colors.white,
               icon: Icon(Icons.search),
-              onPressed: () {},
+              onPressed: () => Get.to(() => ResultPage('asdf', index: 0)),
             ),
           ),
         ],

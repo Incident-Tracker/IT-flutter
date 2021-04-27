@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/pages/result_page.dart';
 
 class CategoryPage extends StatelessWidget {
   @override
@@ -16,28 +18,31 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Container buildCategory(int index) {
-    return Container(
-          color: Color(Random().nextInt(0xffffffff)).withOpacity(0.4),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(),
-              Icon(
-                Icons.videogame_asset,
-                size: 48,
-              ),
-              Text(
-                'Item $index',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: "NotoSansCJKkr",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
+  Widget buildCategory(int index) {
+    return GestureDetector(
+      onTap: () => Get.to(ResultPage('Item $index')),
+      child: Container(
+            color: Color(Random().nextInt(0xffffffff)).withOpacity(0.4),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(),
+                Icon(
+                  Icons.videogame_asset,
+                  size: 48,
                 ),
-              ),
-            ],
+                Text(
+                  'Item $index',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: "NotoSansCJKkr",
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
           ),
-        );
+    );
   }
 }
