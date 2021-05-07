@@ -25,8 +25,10 @@ class PostWidget extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(),
-              color: Colors.black,
+              image: DecorationImage(
+                image: NetworkImage(_postModel.imageAddress),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(

@@ -108,7 +108,7 @@ class _RankingPageState extends State<RankingPage> {
         buildTextWithColor((index + 1).toString(), index),
         buildTextWithColor('규카츠 먹고 싶다', index),
         buildTextWithColor('호두과자', index),
-        buildTextWithColor('4,444', index),
+        buildTextWithColor('19,721,121', index),
       ],
     );
   }

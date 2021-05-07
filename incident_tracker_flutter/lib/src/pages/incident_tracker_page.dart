@@ -5,7 +5,6 @@ import 'package:incident_tracker_flutter/src/pages/category_page.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/category_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/profile_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/ranking_icons.dart';
-import 'package:incident_tracker_flutter/src/utility/icons/write_post_icons.dart';
 import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart';
 
 import 'home_page.dart';
@@ -35,7 +34,7 @@ class IncidentTrackerPage extends StatelessWidget {
           showUnselectedLabels: true,
           onTap: (index) => _navController.selectedIndex = index,
           currentIndex: _navController.selectedIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: '메인페이지',

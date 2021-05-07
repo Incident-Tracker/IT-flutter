@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/pages/result_page.dart';
 
 class SearchView extends StatelessWidget {
+  final int index;
+
+  const SearchView(this.index, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +31,7 @@ class SearchView extends StatelessWidget {
                   ),
                   border: InputBorder.none,
                 ),
-                onSubmitted: (value) => Get.to(() => ResultPage(value, index: 0)),
+                onSubmitted: (value) => Get.to(() => ResultPage(value, index: index)),
               ),
             ),
           ),
@@ -36,7 +40,7 @@ class SearchView extends StatelessWidget {
             child: IconButton(
               color: Colors.white,
               icon: Icon(Icons.search),
-              onPressed: () => Get.to(() => ResultPage('asdf', index: 0)),
+              onPressed: () => Get.to(() => ResultPage('asdf', index: index)),
             ),
           ),
         ],

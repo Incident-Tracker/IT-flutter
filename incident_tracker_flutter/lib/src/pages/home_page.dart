@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/models/nav_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/popular_post_in_Slider.dart';
 import 'package:incident_tracker_flutter/src/widgets/post_list.dart';
 import 'package:incident_tracker_flutter/src/widgets/search_view.dart';
 import 'package:incident_tracker_flutter/src/widgets/topic_category.dart';
 
 class HomePage extends StatelessWidget {
+  final NavController _navController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SearchView(),
+        SearchView(0),
         PopularPostInSlider(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -30,10 +34,10 @@ class HomePage extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
-          child: Text(
+        const Expanded(
+          child: const Text(
             "주제별 카테고리",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontFamily: "NotoSansCJKkr",
               fontWeight: FontWeight.bold,
@@ -41,14 +45,17 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          "더보기",
-          style: TextStyle(
-            fontSize: 12,
-            fontFamily: "NotoSansCJKkr",
+        GestureDetector(
+          onTap: () => _navController.selectedIndex = 1,
+          child: const Text(
+            "더보기",
+            style: const TextStyle(
+              fontSize: 12,
+              fontFamily: "NotoSansCJKkr",
+            ),
           ),
         ),
-        Icon(Icons.keyboard_arrow_right_sharp),
+        const Icon(Icons.keyboard_arrow_right_sharp),
       ],
     );
   }
