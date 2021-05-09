@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/category_box.dart';
 
 class CategoryPage extends StatelessWidget {
-  List<Widget> list = [
-    CategoryBox('연애', Icons.live_tv_rounded),
-  ];
+  final CategoryController _categoryController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,10 @@ class CategoryPage extends StatelessWidget {
         crossAxisCount: 3,
         mainAxisSpacing: 14,
         crossAxisSpacing: 16,
-        children: list,
+        children: _categoryController
+            .getSkippedCategories()
+            .map((e) => CategoryBox(e))
+            .toList(),
       ),
     );
   }

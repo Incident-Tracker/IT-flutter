@@ -3,19 +3,15 @@ import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/category_button.dart';
 
-// ignore: must_be_immutable
 class TopicCategory extends StatelessWidget {
-  CategorySelectController categorySelectController =
-      Get.put(CategorySelectController());
+  final CategoryController categorySelectController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    var categories = categorySelectController.categories;
-
     return SizedBox(
       height: 48,
       child: ListView.builder(
-        itemCount: categories.length,
+        itemCount: categorySelectController.categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return Container(
@@ -27,7 +23,7 @@ class TopicCategory extends StatelessWidget {
             ),
             child: Obx(
               () => CategoryButton(
-                categories[index],
+                categorySelectController.categories[index].left,
                 onPressed: () =>
                     categorySelectController.selectedCategory = index,
                 isColored: categorySelectController.selectedCategory == index,

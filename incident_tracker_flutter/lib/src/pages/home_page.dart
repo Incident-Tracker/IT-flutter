@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/models/nav_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/nav_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/popular_post_in_Slider.dart';
 import 'package:incident_tracker_flutter/src/widgets/post_list.dart';
 import 'package:incident_tracker_flutter/src/widgets/search_view.dart';
@@ -8,12 +9,13 @@ import 'package:incident_tracker_flutter/src/widgets/topic_category.dart';
 
 class HomePage extends StatelessWidget {
   final NavController _navController = Get.find();
+  final CategoryController _categoryController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SearchView(0),
+        SearchView(),
         PopularPostInSlider(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -24,7 +26,8 @@ class HomePage extends StatelessWidget {
           child: TopicCategory(),
         ),
         Expanded(
-          child: PostList(),
+          child: Obx(() => PostList(false,
+              category: _categoryController.getSelectedCategory())),
         ),
       ],
     );

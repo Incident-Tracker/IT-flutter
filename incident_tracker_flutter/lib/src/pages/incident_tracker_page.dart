@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/models/nav_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/nav_controller.dart';
 import 'package:incident_tracker_flutter/src/pages/category_page.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/category_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/profile_icons.dart';
@@ -23,6 +23,7 @@ class IncidentTrackerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: IncidentTrackerAppbar(),
       body: Obx(() => bodyContent[_navController.selectedIndex]),
       bottomNavigationBar: Obx(
