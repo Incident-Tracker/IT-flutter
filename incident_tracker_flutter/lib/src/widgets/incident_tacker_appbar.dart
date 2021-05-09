@@ -8,6 +8,7 @@ class IncidentTrackerAppbar extends StatelessWidget implements PreferredSizeWidg
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
@@ -35,5 +36,4 @@ class IncidentTrackerAppbar extends StatelessWidget implements PreferredSizeWidg
   void writePost() {
 
   }
-
 }
