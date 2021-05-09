@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:incident_tracker_flutter/src/pages/incident_tracker_page.dart';
 
 class LoginPage extends StatelessWidget {

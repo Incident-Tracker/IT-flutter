@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CategoryButton extends StatelessWidget {
   final String text;
@@ -8,14 +9,15 @@ class CategoryButton extends StatelessWidget {
 
   CategoryButton(
     this.text, {
-    Key? key,
     this.onPressed,
     this.isColored = false,
     this.isMini = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    var accentColor = Get.theme.accentColor;
+
     return Container(
       width: 50,
       height: 18,
@@ -23,7 +25,7 @@ class CategoryButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: isColored ? Colors.white : Theme.of(context).accentColor,
+            color: isColored ? Colors.white : accentColor,
             fontFamily: "NotoSansCJKkr",
             fontSize: isMini ? 8 : 16,
             fontWeight: FontWeight.bold,
@@ -33,7 +35,7 @@ class CategoryButton extends StatelessWidget {
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(3.0),
           backgroundColor: MaterialStateProperty.all(
-            isColored ? Theme.of(context).accentColor : Colors.white,
+            isColored ? accentColor : Colors.white,
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(

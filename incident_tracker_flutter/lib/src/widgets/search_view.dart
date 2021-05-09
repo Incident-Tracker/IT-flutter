@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/pages/result_page.dart';
+import 'package:incident_tracker_flutter/src/controller/search_post_controller.dart';
+import 'package:incident_tracker_flutter/src/pages/search_result_page.dart';
 
 class SearchView extends StatelessWidget {
-  final int index;
-
-  const SearchView(this.index, {Key? key}) : super(key: key);
+  final TextEditingController _textEditingController = TextEditingController();
+  final SearchPostController _searchPostController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,9 @@ class SearchView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: TextField(
+                controller: _textEditingController,
                 decoration: InputDecoration(
+                  border: InputBorder.none,
                   hintText: "검색어를 입력하세요",
                   hintStyle: TextStyle(
                     color: Colors.grey,
@@ -29,9 +31,8 @@ class SearchView extends StatelessWidget {
                     fontFamily: "NotoSansCJKkr",
                     fontSize: 15,
                   ),
-                  border: InputBorder.none,
                 ),
-                onSubmitted: (value) => Get.to(() => ResultPage(value, index: index)),
+                onSubmitted: (value) => search(),
               ),
             ),
           ),
@@ -40,11 +41,20 @@ class SearchView extends StatelessWidget {
             child: IconButton(
               color: Colors.white,
               icon: Icon(Icons.search),
-              onPressed: () => Get.to(() => ResultPage('asdf', index: index)),
+              onPressed: search,
             ),
           ),
         ],
       ),
     );
+  }
+
+  void search() {
+    if (_textEditingController.text.isNotEmpty) {
+      _searchPostController.searchWord = _textEditingController.text;
+      Get.to(() => SearchResultPage());
+      FocusScope.of(Get.context!).unfocus();
+      _textEditingController.clear();
+    }
   }
 }

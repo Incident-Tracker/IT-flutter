@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularPostInSlider extends StatelessWidget {
-  RxInt _currentIndex = 0.obs;
+  final RxInt _currentIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
