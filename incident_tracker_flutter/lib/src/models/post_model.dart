@@ -6,6 +6,7 @@ class PostModel {
   final bool isPopular;
   final int likeCount;
   final int viewsCount;
+  final String content;
 
   PostModel(
     this.imageAddress,
@@ -15,5 +16,6 @@ class PostModel {
     this.isPopular,
     this.likeCount,
     this.viewsCount,
+    this.content,
   );
 }
