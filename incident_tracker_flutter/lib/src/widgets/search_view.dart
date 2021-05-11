@@ -17,39 +17,45 @@ class SearchView extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: TextField(
-                controller: _textEditingController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "검색어를 입력하세요",
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "NotoSansCJKkr",
-                    fontSize: 15,
-                  ),
-                ),
-                onSubmitted: (value) => search(),
-              ),
-            ),
-          ),
-          Container(
-            color: Theme.of(context).accentColor,
-            child: IconButton(
-              color: Colors.white,
-              icon: Icon(Icons.search),
-              onPressed: search,
-            ),
-          ),
+          Expanded(child: buildTextField()),
+          buildSearchButton(context),
         ],
       ),
     );
   }
 
-  void search() {
+  Container buildSearchButton(BuildContext context) {
+    return Container(
+      color: Theme.of(context).accentColor,
+      child: IconButton(
+        color: Colors.white,
+        icon: Icon(Icons.search),
+        onPressed: toSearch,
+      ),
+    );
+  }
+
+  Padding buildTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextField(
+        controller: _textEditingController,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: "검색어를 입력하세요",
+          hintStyle: TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontFamily: "NotoSansCJKkr",
+            fontSize: 15,
+          ),
+        ),
+        onSubmitted: (_) => toSearch(),
+      ),
+    );
+  }
+
+  void toSearch() {
     if (_textEditingController.text.isNotEmpty) {
       _searchPostController.searchWord = _textEditingController.text;
       Get.to(() => SearchResultPage());

@@ -13,25 +13,27 @@ class TopicCategory extends StatelessWidget {
       child: ListView.builder(
         itemCount: categorySelectController.categories.length,
         scrollDirection: Axis.horizontal,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            width: 88,
-            margin: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Theme.of(context).accentColor,
-            ),
-            child: Obx(
-              () => CategoryButton(
-                categorySelectController.categories[index].left,
-                onPressed: () =>
-                    categorySelectController.selectedCategory = index,
-                isColored: categorySelectController.selectedCategory == index,
-              ),
-            ),
-          );
-        },
+        itemBuilder: buildCategory,
       ),
     );
+  }
+
+  Container buildCategory(BuildContext context, int index) {
+    return Container(
+          width: 88,
+          margin: EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Theme.of(context).accentColor,
+          ),
+          child: Obx(
+            () => CategoryButton(
+              categorySelectController.categories[index].left,
+              onPressed: () =>
+                  categorySelectController.selectedCategory = index,
+              isColored: categorySelectController.selectedCategory == index,
+            ),
+          ),
+        );
   }
 }

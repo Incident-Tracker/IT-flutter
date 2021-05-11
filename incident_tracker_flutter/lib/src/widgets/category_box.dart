@@ -16,23 +16,27 @@ class CategoryBox extends StatelessWidget {
       onTap: () => Get.to(() => CategoryResultPage(data.left)),
       child: Container(
         color: Color(Random().nextInt(0xffffffff)).withOpacity(0.4),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(),
-            Icon(data.right, size: 48),
-            Text(
-              data.left,
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: "NotoSansCJKkr",
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        ),
+        child: buildColumn(),
       ),
+    );
+  }
+
+  Column buildColumn() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(),
+        Icon(data.right, size: 48),
+        Text(
+          data.left,
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: "NotoSansCJKkr",
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
     );
   }
 }

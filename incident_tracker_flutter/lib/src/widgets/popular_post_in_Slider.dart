@@ -10,45 +10,46 @@ class PopularPostInSlider extends StatelessWidget {
     return Wrap(
       children: [
         CarouselSlider(
-          items: [1, 2, 3, 4, 5, 6, 7].map((i) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            );
-          }).toList(),
+          items: [1, 2, 3, 4, 5, 6, 7].map((_) => buildPopularPost()).toList(),
           options: CarouselOptions(
             aspectRatio: 2,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 3),
             enlargeCenterPage: true,
-            onPageChanged: (i, m) {
-              _currentIndex.value = i;
-            },
+            onPageChanged: (i, _) => _currentIndex.value = i,
           ),
         ),
-        Obx(
-          () => Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [0, 1, 2, 3, 4, 5, 6].map((i) {
-              int index = i;
-              return Container(
-                width: 8.0,
-                height: 8.0,
-                margin: EdgeInsets.symmetric(vertical: 12.0, horizontal: 6.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: _currentIndex.value == index
-                      ? Color.fromRGBO(0, 0, 0, 0.9)
-                      : Color.fromRGBO(0, 0, 0, 0.4),
-                ),
-              );
-            }).toList(),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [0, 1, 2, 3, 4, 5, 6].map(buildDotView).toList(),
         ),
       ],
+    );
+  }
+
+  Container buildPopularPost() {
+    return Container(
+      width: Get.width,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(12),
+      ),
+    );
+  }
+
+  Widget buildDotView(int index) {
+    return Obx(
+      () => Container(
+        width: 8.0,
+        height: 8.0,
+        margin: EdgeInsets.symmetric(vertical: 12.0, horizontal: 6.0),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: _currentIndex.value == index
+              ? Color.fromRGBO(0, 0, 0, 0.9)
+              : Color.fromRGBO(0, 0, 0, 0.4),
+        ),
+      ),
     );
   }
 }

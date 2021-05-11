@@ -9,11 +9,11 @@ class CategoryController extends GetxController {
     Pair('연애', Icons.live_tv_rounded),
   ];
 
-  String getSelectedCategory() => categories[_selectedCategory.value].left;
-
   int get selectedCategory => _selectedCategory.value;
 
   set selectedCategory(int index) => _selectedCategory.value = index;
+
+  String getSelectedCategory() => categories[_selectedCategory.value].left;
 
   List<Pair<String, IconData>> getSkippedCategories() {
     return categories.skip(1).toList();

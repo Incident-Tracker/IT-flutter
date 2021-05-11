@@ -26,8 +26,12 @@ class HomePage extends StatelessWidget {
           child: TopicCategory(),
         ),
         Expanded(
-          child: Obx(() => PostList(false,
-              category: _categoryController.getSelectedCategory())),
+          child: Obx(
+            () => PostList(
+              false,
+              category: _categoryController.getSelectedCategory(),
+            ),
+          ),
         ),
       ],
     );
@@ -37,10 +41,10 @@ class HomePage extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Expanded(
-          child: const Text(
+        Expanded(
+          child: Text(
             "주제별 카테고리",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 20,
               fontFamily: "NotoSansCJKkr",
               fontWeight: FontWeight.bold,
@@ -50,15 +54,15 @@ class HomePage extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => _navController.selectedIndex = 1,
-          child: const Text(
+          child: Text(
             "더보기",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontFamily: "NotoSansCJKkr",
             ),
           ),
         ),
-        const Icon(Icons.keyboard_arrow_right_sharp),
+        Icon(Icons.keyboard_arrow_right_sharp),
       ],
     );
   }
