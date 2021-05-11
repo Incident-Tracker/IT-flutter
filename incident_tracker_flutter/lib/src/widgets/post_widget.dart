@@ -1,93 +1,138 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/models/post_model.dart';
+import 'package:incident_tracker_flutter/src/pages/detail_page.dart';
+import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
 
 import 'category_button.dart';
 
-class PostWidget extends StatelessWidget {
+class PostWidget extends StatelessWidget with SmallCategory {
   final PostModel _postModel;
 
   const PostWidget(this._postModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Get.to(() => DetailPage(_postModel)),
+      child: Container(
+        height: 100,
+        margin: EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            buildPostImageView(),
+            buildContent(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container buildPostImageView() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 100,
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(),
+        image: DecorationImage(
+          image: NetworkImage(_postModel.imageAddress),
+          fit: BoxFit.cover,
+        ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+    );
+  }
+
+  Padding buildContent(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                image: NetworkImage(_postModel.imageAddress),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _postModel.title,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'NotoSansCJKkr',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  _postModel.date,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontFamily: 'NotoSansCJKkr',
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Spacer(),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width - 158,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      CategoryButton(
-                        _postModel.categoryName,
-                        isColored: true,
-                        isMini: true,
-                      ),
-                      if (_postModel.isPopular)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: CategoryButton('인기', isMini: true),
-                        ),
-                      Spacer(),
-                      Text(
-                        '추천 ${_postModel.likeCount}ㆍ조회수 ${_postModel.viewsCount}',
-                        textAlign: TextAlign.end,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'NotoSansCJKkr',
-                          fontSize: 8,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          buildTitle(),
+          buildDate(),
+          Spacer(),
+          buildBottomRow(context),
         ],
+      ),
+    );
+  }
+
+  Text buildTitle() {
+    return Text(
+      _postModel.title,
+      style: TextStyle(
+        color: Colors.black,
+        fontFamily: 'NotoSansCJKkr',
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
+
+  Text buildDate() {
+    return Text(
+      _postModel.date,
+      style: TextStyle(
+        color: Colors.grey,
+        fontFamily: 'NotoSansCJKkr',
+        fontSize: 10,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
+
+  SizedBox buildBottomRow(BuildContext context) {
+    return SizedBox(
+      width: Get.width - 158,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          buildSmallCategory(_postModel.categoryName),
+          if (_postModel.isPopular) buildPopularCategory(),
+          Spacer(),
+          buildLikeAndSeeCountView(),
+        ],
+      ),
+    );
+  }
+
+  Container buildPopularCategory() {
+    return Container(
+      width: 50,
+      height: 18,
+      padding: const EdgeInsets.only(left: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Center(
+        child: Text(
+          '인기',
+          style: TextStyle(
+            color: Get.theme.accentColor,
+            fontFamily: "NotoSansCJKkr",
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Text buildLikeAndSeeCountView() {
+    return Text(
+      '추천 ${_postModel.likeCount}ㆍ조회수 ${_postModel.viewsCount}',
+      textAlign: TextAlign.end,
+      style: TextStyle(
+        color: Colors.grey,
+        fontFamily: 'NotoSansCJKkr',
+        fontSize: 8,
+        fontWeight: FontWeight.w700,
       ),
     );
   }

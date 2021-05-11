@@ -12,13 +12,17 @@ class CategoryPage extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 32, 16, 0),
       child: GridView.count(
         crossAxisCount: 3,
-        mainAxisSpacing: 14,
         crossAxisSpacing: 16,
-        children: _categoryController
-            .getSkippedCategories()
-            .map((e) => CategoryBox(e))
-            .toList(),
+        mainAxisSpacing: 14,
+        children: buildCategoryBoxList(),
       ),
     );
+  }
+
+  List<CategoryBox> buildCategoryBoxList() {
+    return _categoryController
+        .getSkippedCategories()
+        .map((e) => CategoryBox(e))
+        .toList();
   }
 }
