@@ -11,7 +11,7 @@ class SearchWithCategory extends StatelessWidget {
         SearchView(),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 0, 16),
-          child: TopicCategory(),
+          child: TopicCategory('search'),
         ),
       ],
     );

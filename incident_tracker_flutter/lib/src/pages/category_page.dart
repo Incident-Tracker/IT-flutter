@@ -4,7 +4,7 @@ import 'package:incident_tracker_flutter/src/controller/category_select_controll
 import 'package:incident_tracker_flutter/src/widgets/category_box.dart';
 
 class CategoryPage extends StatelessWidget {
-  final CategoryController _categoryController = Get.find();
+  final _categoryController = Get.put(CategoryController(), tag: 'category');
 
   @override
   Widget build(BuildContext context) {

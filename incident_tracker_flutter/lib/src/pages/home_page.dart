@@ -9,7 +9,7 @@ import 'package:incident_tracker_flutter/src/widgets/topic_category.dart';
 
 class HomePage extends StatelessWidget {
   final NavController _navController = Get.find();
-  final CategoryController _categoryController = Get.find();
+  final _categoryController = Get.put(CategoryController(), tag: 'home');
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.fromLTRB(16, 0, 16, 8),
-          child: TopicCategory(),
+          child: TopicCategory('home'),
         ),
         Expanded(
           child: Obx(

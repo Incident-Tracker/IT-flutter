@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
 import 'package:incident_tracker_flutter/src/controller/search_post_controller.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/result_mixin.dart';
 import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart';
@@ -13,6 +14,7 @@ class SearchResultPage extends StatefulWidget {
 
 class _SearchResultPageState extends State<SearchResultPage> with ResultMixin {
   final SearchPostController _searchPostController = Get.find();
+  final _categoryController = Get.put(CategoryController(), tag: 'search');
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,12 @@ class _SearchResultPageState extends State<SearchResultPage> with ResultMixin {
         children: [
           SearchWithCategory(),
           buildSearchWithCategoryWidget(),
-          Expanded(child: PostList(true)),
+          Expanded(
+            child: PostList(
+              true,
+              category: _categoryController.getSelectedCategory(),
+            ),
+          ),
         ],
       ),
     );

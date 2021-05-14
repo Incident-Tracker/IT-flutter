@@ -4,36 +4,51 @@ import 'package:incident_tracker_flutter/src/controller/category_select_controll
 import 'package:incident_tracker_flutter/src/widgets/category_button.dart';
 
 class TopicCategory extends StatelessWidget {
-  final CategoryController categorySelectController = Get.find();
+  final CategoryController categorySelectController;
+  final bool isSkipped;
+
+  TopicCategory(String tag, {this.isSkipped = false})
+      : this.categorySelectController = Get.find(tag: tag);
 
   @override
   Widget build(BuildContext context) {
+    var size = categorySelectController.categories.length;
+    var list = categorySelectController.categories.map((e) => e.left).toList();
+
+    if (isSkipped) {
+      size--;
+      list = categorySelectController
+          .getSkippedCategories()
+          .map((e) => e.left)
+          .toList();
+    }
+
     return SizedBox(
       height: 48,
       child: ListView.builder(
-        itemCount: categorySelectController.categories.length,
+        itemCount: size,
         scrollDirection: Axis.horizontal,
-        itemBuilder: buildCategory,
+        itemBuilder: (BuildContext context, int index) =>
+            buildCategory(list[index], index),
       ),
     );
   }
 
-  Container buildCategory(BuildContext context, int index) {
+  Container buildCategory(String name, int index) {
     return Container(
-          width: 88,
-          margin: EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Theme.of(context).accentColor,
-          ),
-          child: Obx(
-            () => CategoryButton(
-              categorySelectController.categories[index].left,
-              onPressed: () =>
-                  categorySelectController.selectedCategory = index,
-              isColored: categorySelectController.selectedCategory == index,
-            ),
-          ),
-        );
+      width: 88,
+      margin: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Get.theme.accentColor,
+      ),
+      child: Obx(
+        () => CategoryButton(
+          name,
+          onPressed: () => categorySelectController.selectedCategory = index,
+          isColored: categorySelectController.selectedCategory == index,
+        ),
+      ),
+    );
   }
 }
