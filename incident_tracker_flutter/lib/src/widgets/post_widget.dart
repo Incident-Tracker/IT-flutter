@@ -4,8 +4,6 @@ import 'package:incident_tracker_flutter/src/models/post_model.dart';
 import 'package:incident_tracker_flutter/src/pages/detail_page.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
 
-import 'category_button.dart';
-
 class PostWidget extends StatelessWidget with SmallCategory {
   final PostModel _postModel;
 
@@ -93,33 +91,10 @@ class PostWidget extends StatelessWidget with SmallCategory {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           buildSmallCategory(_postModel.categoryName),
-          if (_postModel.isPopular) buildPopularCategory(),
+          if (_postModel.isPopular) buildSmallUnColoredCategory('인기'),
           Spacer(),
           buildLikeAndSeeCountView(),
         ],
-      ),
-    );
-  }
-
-  Container buildPopularCategory() {
-    return Container(
-      width: 50,
-      height: 18,
-      padding: const EdgeInsets.only(left: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: Text(
-          '인기',
-          style: TextStyle(
-            color: Get.theme.accentColor,
-            fontFamily: "NotoSansCJKkr",
-            fontWeight: FontWeight.bold,
-            fontSize: 10,
-          ),
-        ),
       ),
     );
   }
