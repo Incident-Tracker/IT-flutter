@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/category_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/category_button.dart';
 
 class TopicCategory extends StatelessWidget {
@@ -45,8 +45,8 @@ class TopicCategory extends StatelessWidget {
       child: Obx(
         () => CategoryButton(
           name,
-          onPressed: () => categorySelectController.selectedCategory = index,
-          isColored: categorySelectController.selectedCategory == index,
+          onPressed: () => categorySelectController.selectedCategoryIndex = index,
+          isColored: categorySelectController.selectedCategoryIndex == index,
         ),
       ),
     );

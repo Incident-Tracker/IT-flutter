@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/category_controller.dart';
 import 'package:incident_tracker_flutter/src/controller/nav_controller.dart';
 import 'package:incident_tracker_flutter/src/widgets/popular_post_in_Slider.dart';
 import 'package:incident_tracker_flutter/src/widgets/post_list.dart';

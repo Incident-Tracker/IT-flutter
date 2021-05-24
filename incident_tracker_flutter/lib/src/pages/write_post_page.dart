@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:incident_tracker_flutter/src/controller/category_select_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/category_controller.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
 import 'package:incident_tracker_flutter/src/widgets/topic_category.dart';
 
