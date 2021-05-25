@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/controller/nav_controller.dart';
 import 'package:incident_tracker_flutter/src/pages/category_page.dart';
+import 'package:incident_tracker_flutter/src/pages/profile_page.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/category_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/profile_icons.dart';
 import 'package:incident_tracker_flutter/src/utility/icons/ranking_icons.dart';
@@ -17,7 +18,7 @@ class IncidentTrackerPage extends StatelessWidget {
     HomePage(),
     CategoryPage(),
     RankingPage(),
-    Container(),
+    ProfilePage(),
   ];
 
   final List<BottomNavigationBarItem> bottomNavigationItems = [

@@ -46,4 +46,26 @@ mixin SmallCategory {
       ),
     );
   }
+
+  Container buildEditButton(String text) {
+    return Container(
+      width: 58,
+      height: 27,
+      decoration: BoxDecoration(
+        color: Get.theme.accentColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "NotoSansCJKkr",
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 }

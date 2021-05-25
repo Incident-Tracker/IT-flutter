@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: _initKakaoTalkInstalled,
+                    onTap: successLogin,
                     child: makeLoginButton(
                       Colors.yellow,
                       'images/kakao.png',
@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: successLogin,
                     child: makeLoginButton(
                       Colors.white,
                       'images/google.png',
