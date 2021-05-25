@@ -7,21 +7,11 @@ import 'package:incident_tracker_flutter/src/controller/profile_controller.dart'
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
 import 'package:incident_tracker_flutter/src/widgets/incident_tacker_appbar.dart';
 
-// ignore: must_be_immutable
 class ProfileEditPage extends StatelessWidget with SmallCategory {
   final ProfileController _controller = Get.find();
-  late var nameController;
-  late var emailController;
-
-  init() {
-    nameController = TextEditingController(text: _controller.name);
-    emailController = TextEditingController(text: _controller.name);
-  }
 
   @override
   Widget build(BuildContext context) {
-    init();
-
     return Scaffold(
       appBar: IncidentTrackerAppbar(),
       body: Obx(
@@ -85,6 +75,7 @@ class ProfileEditPage extends StatelessWidget with SmallCategory {
                       ),
                       GestureDetector(
                         onTap: () {
+                          _controller.saveUserInfoIntoLocal();
                           Get.back();
                         },
                         child: buildEditButton('저장'),
@@ -93,12 +84,14 @@ class ProfileEditPage extends StatelessWidget with SmallCategory {
                   ),
                   SizedBox(height: 16),
                   TextField(
-                    controller: nameController,
+                    controller: TextEditingController(text: _controller.name),
                     style: TextStyle(color: Colors.black),
+                    onChanged: (v) => _controller.name = v,
                   ),
                   TextField(
-                    controller: emailController,
+                    controller: TextEditingController(text: _controller.email),
                     style: TextStyle(color: Colors.black),
+                    onChanged: (v) => _controller.email = v,
                   ),
                 ],
               ),

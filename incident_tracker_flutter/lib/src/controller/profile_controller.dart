@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController {
   var _name = ''.obs;
@@ -7,7 +8,12 @@ class ProfileController extends GetxController {
   var _profileImage = ''.obs;
 
   ProfileController() {
-
+    SharedPreferences.getInstance().then((prefs) {
+      name = prefs.getString('name') ?? 'UserName';
+      email = prefs.getString('email') ?? 'Email';
+      background = prefs.getString('background') ?? '';
+      profileImage = prefs.getString('profileImage') ?? '';
+    });
   }
 
   String get name => _name.value;
@@ -27,6 +33,11 @@ class ProfileController extends GetxController {
   set profileImage(String value) => _profileImage.value = value;
 
   saveUserInfoIntoLocal() {
-
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('name', name);
+      prefs.setString('email', email);
+      prefs.setString('background', background);
+      prefs.setString('profileImage', profileImage);
+    });
   }
 }
