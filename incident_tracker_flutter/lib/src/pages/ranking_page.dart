@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
 
 class RankingPage extends StatefulWidget {
   @override
@@ -7,31 +9,34 @@ class RankingPage extends StatefulWidget {
 }
 
 class _RankingPageState extends State<RankingPage> {
+  PostController _postController = Get.find();
   int _currentRank = 0;
 
   Widget _buildRankTabButton(String title, int index) {
     return Builder(
       builder: (context) => Container(
-              height: 32,
-              color: _currentRank == index ? Theme.of(context).accentColor : Colors.transparent,
-              child: TextButton(
-                style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                onPressed: () {
-                  setState(() {
-                    _currentRank = index;
-                  });
-                },
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: _currentRank == index ? Colors.white : Colors.black,
-                    fontSize: 14,
-                    fontFamily: 'NotoSansCJKkr',
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
+        height: 32,
+        color: _currentRank == index
+            ? Theme.of(context).accentColor
+            : Colors.transparent,
+        child: TextButton(
+          style: TextButton.styleFrom(padding: EdgeInsets.zero),
+          onPressed: () {
+            setState(() {
+              _currentRank = index;
+            });
+          },
+          child: Text(
+            title,
+            style: TextStyle(
+              color: _currentRank == index ? Colors.white : Colors.black,
+              fontSize: 14,
+              fontFamily: 'NotoSansCJKkr',
+              fontWeight: FontWeight.w700,
             ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -92,7 +97,7 @@ class _RankingPageState extends State<RankingPage> {
           child: ListView.separated(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemCount: 40,
+            itemCount: _postController.postList.length,
             itemBuilder: (context, index) => buildRankName(index),
             separatorBuilder: (context, index) => Divider(),
           ),
@@ -106,9 +111,9 @@ class _RankingPageState extends State<RankingPage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         buildTextWithColor((index + 1).toString(), index),
-        buildTextWithColor('규카츠 먹고 싶다', index),
-        buildTextWithColor('호두과자', index),
-        buildTextWithColor('19,721,121', index),
+        buildTextWithColor(_postController.postList[index].title, index),
+        buildTextWithColor(_postController.postList[index].writer, index),
+        buildTextWithColor(_postController.postList[index].date, index),
       ],
     );
   }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
 import 'package:incident_tracker_flutter/src/controller/search_post_controller.dart';
 
 import 'post_widget.dart';
 
 class PostList extends StatelessWidget {
   final SearchPostController _searchPostController = Get.find();
+  final PostController _postController = Get.find();
   final bool _isReact;
   final String? category;
 
@@ -17,7 +19,7 @@ class PostList extends StatelessWidget {
   }
 
   ListView buildListView() {
-    var postList = _searchPostController.getPostBySearchWord();
+    var postList = _searchPostController.getPostBySearchWord(_postController.postList);
 
     if(category != null && category != '전체') {
       postList = _searchPostController.getPostByCategory(category!, postList);
