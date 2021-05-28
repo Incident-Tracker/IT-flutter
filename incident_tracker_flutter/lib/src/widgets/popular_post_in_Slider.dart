@@ -1,38 +1,69 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
+import 'package:incident_tracker_flutter/src/models/post_model.dart';
+import 'package:incident_tracker_flutter/src/pages/detail_page.dart';
 
 class PopularPostInSlider extends StatelessWidget {
+  final PostController _postController = Get.find();
   final RxInt _currentIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        CarouselSlider(
-          items: [1, 2, 3, 4, 5, 6, 7].map((_) => buildPopularPost()).toList(),
-          options: CarouselOptions(
-            aspectRatio: 2,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
-            enlargeCenterPage: true,
-            onPageChanged: (i, _) => _currentIndex.value = i,
+        Obx(
+        () => CarouselSlider(
+            items: _postController
+                .getLikeSortedList()
+                .take(7)
+                .toList()
+                .reversed
+                .toList()
+                .map((e) => buildPopularPost(e))
+                .toList(),
+            options: CarouselOptions(
+              aspectRatio: 2,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 3),
+              enlargeCenterPage: true,
+              onPageChanged: (i, _) => _currentIndex.value = i,
+            ),
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [0, 1, 2, 3, 4, 5, 6].map(buildDotView).toList(),
+          children: List.generate(
+              _postController
+                  .getLikeSortedList()
+                  .take(7)
+                  .toList()
+                  .reversed
+                  .toList()
+                  .length,
+              (i) => i).map(buildDotView).toList(),
         ),
       ],
     );
   }
 
-  Container buildPopularPost() {
-    return Container(
-      width: Get.width,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
+  GestureDetector buildPopularPost(PostModel post) {
+    return GestureDetector(
+      onTap: () => Get.to(() => DetailPage(post)),
+      child: Container(
+        width: Get.width,
+        decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(12),
+            image: DecorationImage(
+              image: post.imageAddress.contains('http')
+                  ? NetworkImage(post.imageAddress) as ImageProvider
+                  : FileImage(File(post.imageAddress)),
+              fit: BoxFit.cover,
+            )),
       ),
     );
   }

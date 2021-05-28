@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:incident_tracker_flutter/src/controller/category_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
+import 'package:incident_tracker_flutter/src/controller/profile_controller.dart';
+import 'package:incident_tracker_flutter/src/models/post_model.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
 import 'package:incident_tracker_flutter/src/widgets/topic_category.dart';
+import 'package:intl/intl.dart';
 
 class WritePostPage extends StatelessWidget with SmallCategory {
   final _categoryController = Get.put(CategoryController(), tag: 'write');
+  final _postController = Get.find<PostController>();
+  final _profileController = Get.find<ProfileController>();
   final _imagePath = ''.obs;
   final titleEditController = TextEditingController();
   final contentEditController = TextEditingController();
@@ -35,10 +41,7 @@ class WritePostPage extends StatelessWidget with SmallCategory {
           height: Get.height * 0.28,
           color: Colors.grey,
           child: _imagePath.value.isNotEmpty
-              ? Image.file(
-                  File(_imagePath.value),
-                  fit: BoxFit.cover,
-                )
+              ? Image.file(File(_imagePath.value), fit: BoxFit.cover)
               : null,
         ),
       ),
@@ -47,7 +50,7 @@ class WritePostPage extends StatelessWidget with SmallCategory {
 
   Future getImage() async {
     final pickedFile =
-    await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().getImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       _imagePath.value = pickedFile.path;
@@ -125,7 +128,19 @@ class WritePostPage extends StatelessWidget with SmallCategory {
     if (titleEditController.text.isNotEmpty &&
         contentEditController.text.isNotEmpty &&
         _imagePath.value.isNotEmpty) {
-      _categoryController.getSelectedCategory();
+      var post = PostModel(
+        _imagePath.value,
+        titleEditController.text,
+        DateFormat('yyyy.MM.dd').format(DateTime.now()),
+        _profileController.name,
+        _categoryController.getSelectedCategory(),
+        true,
+        0,
+        0,
+        contentEditController.text,
+      );
+      _postController.savePost(post);
+      Get.back();
     } else {
       Get.snackbar('내용을 채워주세요!', '이미지, 제목, 내용이 제대로 입력되었는지 확인해주세요.');
     }

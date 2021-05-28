@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:incident_tracker_flutter/src/models/post_model.dart';
 
 class PostController extends GetxController {
-  List<PostModel> postList = [
+  final postBox = Hive.box('post');
+  final postList = [
     PostModel(
         'https://images-ext-2.discordapp.net/external/x_15YPAFUjyyUiBfKrUfR3EkgjgI_m8XkUXEyByT8HI/https/pbs.twimg.com/profile_images/796031746961588224/OSSAvw9d_400x400.jpg',
         '친구를 만나느랴 444',
@@ -26,7 +28,7 @@ class PostController extends GetxController {
       '2',
     ),
     PostModel(
-      'https://cfd.tourtips.com/@cms_300/2018102906/gjfn8k/P1750130.jpg',
+      'https://t1.daumcdn.net/cfile/tistory/2663F43655798FBB31',
       '규카츠 먹고 싶어요',
       '2021.05.01',
       '호두과자',
@@ -36,5 +38,24 @@ class PostController extends GetxController {
       19721121,
       '가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하',
     )
-  ];
+  ].obs;
+
+  PostController() {
+    for(var i = 0; i < postBox.length; i++) {
+      postList.add(postBox.getAt(0));
+    }
+  }
+
+  List<PostModel> getLikeSortedList() {
+    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? 1 : -1);
+  }
+
+  List<PostModel> getViewSortedList() {
+    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? 1 : -1);
+  }
+
+  void savePost(PostModel post) {
+    postBox.add(post);
+    postList.add(post);
+  }
 }

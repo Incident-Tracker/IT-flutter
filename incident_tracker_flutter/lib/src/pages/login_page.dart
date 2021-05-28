@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/pages/incident_tracker_page.dart';
-import 'package:kakao_flutter_sdk/all.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    KakaoContext.clientId = 'fb0a4457bf97877770ddb0ffd6cb9f00';
-
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
@@ -81,46 +78,6 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _initKakaoTalkInstalled() async {
-    final installed = await isKakaoTalkInstalled();
-    print('kakao install: $installed');
-
-    if(installed) {
-      loginWithKakao();
-    } else {
-      loginWithKakaoTalk();
-    }
-  }
-
-  void loginWithKakao() async {
-    try {
-      String authCode = await AuthCodeClient.instance.request();
-      getAccessTaken(authCode);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void loginWithKakaoTalk() async {
-    try {
-      String authCode = await AuthCodeClient.instance.requestWithTalk();
-      getAccessTaken(authCode);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void getAccessTaken(String authCode) async {
-    try {
-      AccessTokenResponse token = await AuthApi.instance.issueAccessToken(authCode);
-      AccessTokenStore.instance.toStore(token);
-      print(token);
-      successLogin();
-    } catch (e) {
-      print(e);
-    }
   }
 
   void successLogin() {

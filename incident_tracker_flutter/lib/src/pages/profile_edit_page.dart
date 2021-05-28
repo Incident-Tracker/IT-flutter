@@ -86,12 +86,12 @@ class ProfileEditPage extends StatelessWidget with SmallCategory {
                   TextField(
                     controller: TextEditingController(text: _controller.name),
                     style: TextStyle(color: Colors.black),
-                    onChanged: (v) => _controller.name = v,
+                    onSubmitted: (v) => _controller.name = v,
                   ),
                   TextField(
                     controller: TextEditingController(text: _controller.email),
                     style: TextStyle(color: Colors.black),
-                    onChanged: (v) => _controller.email = v,
+                    onSubmitted: (v) => _controller.email = v,
                   ),
                 ],
               ),

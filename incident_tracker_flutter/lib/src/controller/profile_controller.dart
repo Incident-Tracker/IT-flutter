@@ -1,19 +1,18 @@
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
 class ProfileController extends GetxController {
-  var _name = ''.obs;
-  var _email = ''.obs;
-  var _background = ''.obs;
-  var _profileImage = ''.obs;
+  final profileBox = Hive.box('profile');
+  final _name = ''.obs;
+  final _email = ''.obs;
+  final _background = ''.obs;
+  final _profileImage = ''.obs;
 
   ProfileController() {
-    SharedPreferences.getInstance().then((prefs) {
-      name = prefs.getString('name') ?? 'UserName';
-      email = prefs.getString('email') ?? 'Email';
-      background = prefs.getString('background') ?? '';
-      profileImage = prefs.getString('profileImage') ?? '';
-    });
+    name = profileBox.get('name') ?? 'UserName';
+    email = profileBox.get('email') ?? 'Email';
+    background = profileBox.get('background') ?? '';
+    profileImage = profileBox.get('profileImage') ?? '';
   }
 
   String get name => _name.value;
@@ -33,11 +32,9 @@ class ProfileController extends GetxController {
   set profileImage(String value) => _profileImage.value = value;
 
   saveUserInfoIntoLocal() {
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.setString('name', name);
-      prefs.setString('email', email);
-      prefs.setString('background', background);
-      prefs.setString('profileImage', profileImage);
-    });
+    profileBox.put('name', name);
+    profileBox.put('email', email);
+    profileBox.put('background', background);
+    profileBox.put('profileImage', profileImage);
   }
 }

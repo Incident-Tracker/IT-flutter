@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
 import 'package:incident_tracker_flutter/src/models/post_model.dart';
 import 'package:incident_tracker_flutter/src/pages/detail_page.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';
@@ -38,7 +41,9 @@ class PostWidget extends StatelessWidget with SmallCategory {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
-          image: NetworkImage(_postModel.imageAddress),
+          image: _postModel.imageAddress.contains('http')
+              ? NetworkImage(_postModel.imageAddress) as ImageProvider
+              : FileImage(File(_postModel.imageAddress)),
           fit: BoxFit.cover,
         ),
       ),

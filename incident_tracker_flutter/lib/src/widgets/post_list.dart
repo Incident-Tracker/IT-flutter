@@ -14,12 +14,12 @@ class PostList extends StatelessWidget {
   PostList(this._isReact, {this.category});
 
   @override
-  Widget build(BuildContext context) {
-    return _isReact ? Obx(() => buildListView()) : buildListView();
-  }
+  Widget build(BuildContext context) => Obx(() => buildListView());
 
   ListView buildListView() {
     var postList = _searchPostController.getPostBySearchWord(_postController.postList);
+
+    if(!_isReact) postList = _postController.postList;
 
     if(category != null && category != '전체') {
       postList = _searchPostController.getPostByCategory(category!, postList);
