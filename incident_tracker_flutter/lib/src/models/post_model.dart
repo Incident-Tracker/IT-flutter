@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 0)
 class PostModel extends HiveObject {
   @HiveField(0)
   final String imageAddress;

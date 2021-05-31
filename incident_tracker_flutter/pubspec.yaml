@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.17.0
   hive: ^2.0.4
   hive_flutter: ^1.0.0
+  webview_flutter: ^2.0.8
 
 dev_dependencies:
   flutter_test:

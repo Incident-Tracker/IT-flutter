@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/pages/incident_tracker_page.dart';
@@ -33,7 +34,12 @@ class LoginPage extends StatelessWidget {
                   ),
                   Spacer(),
                   GestureDetector(
-                    onTap: successLogin,
+                    onTap: () {
+                      // Dio()
+                      //   ..interceptors.add(LogInterceptor())
+                      //   ..get('http://10.156.145.205:8001/auth/kakao');
+                      successLogin();
+                    },
                     child: makeLoginButton(
                       Colors.yellow,
                       'images/kakao.png',
@@ -82,7 +88,7 @@ class LoginPage extends StatelessWidget {
 
   void successLogin() {
     Get.to(
-      IncidentTrackerPage(),
+      () => IncidentTrackerPage(),
       transition: Transition.rightToLeft,
       duration: Duration(seconds: 1),
     );

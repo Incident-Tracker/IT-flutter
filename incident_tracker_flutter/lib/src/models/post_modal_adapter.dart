@@ -3,7 +3,7 @@ import 'package:incident_tracker_flutter/src/models/post_model.dart';
 
 class PostModelAdapter extends TypeAdapter<PostModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   PostModel read(BinaryReader reader) {

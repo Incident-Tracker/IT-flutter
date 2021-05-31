@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
 import 'package:incident_tracker_flutter/src/models/post_model.dart';
 
+import 'detail_page.dart';
+
 class RankingPage extends StatefulWidget {
   @override
   _RankingPageState createState() => _RankingPageState();
@@ -61,29 +63,6 @@ class _RankingPageState extends State<RankingPage> {
             children: partsOfRank.map((e) => Expanded(child: e)).toList(),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(
-                Icons.keyboard_arrow_left_sharp,
-                color: Colors.black,
-              ),
-              Text(
-                '전체',
-                style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'NotoSansCJKkr'),
-              ),
-              Icon(
-                Icons.keyboard_arrow_right_sharp,
-                color: Colors.black,
-              ),
-            ],
-          ),
-        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -95,41 +74,60 @@ class _RankingPageState extends State<RankingPage> {
         ),
         Expanded(
           child: Obx(
-            () => ListView.separated(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: _postController.postList.length,
-              itemBuilder: (context, index) {
-                if (_currentRank.value == 0) {
-                  return buildRankName(
-                      _postController.getViewSortedList()[index], index);
-                }
+            () {
+              if (_currentRank.value == 0) {
+                return ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: _postController.postList.length,
+                  itemBuilder: (context, index) => buildRankName(
+                    _postController.getViewSortedList()[index],
+                    index,
+                  ),
+                  separatorBuilder: (context, index) => Divider(),
+                );
+              } else if (_currentRank.value == 1) {
+                return ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: _postController.postList.length,
+                  itemBuilder: (context, index) => buildRankName(
+                    _postController.getLikeSortedList()[index],
+                    index,
+                  ),
+                  separatorBuilder: (context, index) => Divider(),
+                );
+              }
 
-                if (_currentRank.value == 0) {
-                  return buildRankName(
-                      _postController.getLikeSortedList()[index], index);
-                }
-
-                return buildRankName(
-                    _postController.postList[index], index);
-              },
-              separatorBuilder: (context, index) => Divider(),
-            ),
+              return ListView.separated(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: _postController.postList.length,
+                itemBuilder: (context, index) => buildRankName(
+                  _postController.postList[index],
+                  index,
+                ),
+                separatorBuilder: (context, index) => Divider(),
+              );
+            },
           ),
         ),
       ],
     );
   }
 
-  Row buildRankName(PostModel post, index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        buildTextWithColor((index + 1).toString(), index),
-        buildTextWithColor(post.title, index),
-        buildTextWithColor(post.writer, index),
-        buildTextWithColor(post.date, index),
-      ],
+  Widget buildRankName(PostModel post, index) {
+    return GestureDetector(
+      onTap: () => Get.to(() => DetailPage(post)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          buildTextWithColor((index + 1).toString(), index),
+          buildTextWithColor(post.title, index),
+          buildTextWithColor(post.writer, index),
+          buildTextWithColor(post.date, index),
+        ],
+      ),
     );
   }
 

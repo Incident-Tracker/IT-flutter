@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -140,6 +141,20 @@ class WritePostPage extends StatelessWidget with SmallCategory {
         contentEditController.text,
       );
       _postController.savePost(post);
+
+      // try {
+      //   Map<String, String> map = {
+      //     'title': titleEditController.text,
+      //     'description': contentEditController.text,
+      //     'thumnail': _imagePath.value.split('/').last,
+      //     'category': _categoryController.getSelectedCategory(),
+      //   };
+      //   var dio = Dio()..interceptors.add(LogInterceptor());
+      //   dio.post('http://10.156.145.205:8001/post', data: map).then(print);
+      // } catch (e) {
+      //   print(e);
+      // }
+
       Get.back();
     } else {
       Get.snackbar('내용을 채워주세요!', '이미지, 제목, 내용이 제대로 입력되었는지 확인해주세요.');

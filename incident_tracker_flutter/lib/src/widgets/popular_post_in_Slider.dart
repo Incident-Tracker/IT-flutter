@@ -21,8 +21,6 @@ class PopularPostInSlider extends StatelessWidget {
                 .getLikeSortedList()
                 .take(7)
                 .toList()
-                .reversed
-                .toList()
                 .map((e) => buildPopularPost(e))
                 .toList(),
             options: CarouselOptions(

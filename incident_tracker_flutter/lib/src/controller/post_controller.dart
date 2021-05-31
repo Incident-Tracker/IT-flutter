@@ -35,23 +35,23 @@ class PostController extends GetxController {
       '연애',
       true,
       444444,
-      19721121,
-      '가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하',
+      19721120,
+      '규카츠를 태어난지 1972년동안 먹지 못했습니다. 규카츠 사주세요 ㅜㅜ',
     )
   ].obs;
 
   PostController() {
     for(var i = 0; i < postBox.length; i++) {
-      postList.add(postBox.getAt(0));
+      postList.add(postBox.getAt(i));
     }
   }
 
   List<PostModel> getLikeSortedList() {
-    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? 1 : -1);
+    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? -1 : 1);
   }
 
   List<PostModel> getViewSortedList() {
-    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? 1 : -1);
+    return List.of(postList)..sort((a, b) => a.viewsCount >= b.viewsCount ? -1 : 1);
   }
 
   void savePost(PostModel post) {
