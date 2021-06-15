@@ -16,11 +16,11 @@ class PopularPostInSlider extends StatelessWidget {
     return Wrap(
       children: [
         Obx(
-        () => CarouselSlider(
+          () => CarouselSlider(
             items: _postController
                 .getLikeSortedList()
+                .reversed
                 .take(7)
-                .toList()
                 .map((e) => buildPopularPost(e))
                 .toList(),
             options: CarouselOptions(
@@ -32,17 +32,13 @@ class PopularPostInSlider extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-              _postController
-                  .getLikeSortedList()
-                  .take(7)
-                  .toList()
-                  .reversed
-                  .toList()
-                  .length,
-              (i) => i).map(buildDotView).toList(),
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+                _postController.getLikeSortedList().take(7).length,
+                (i) => i).map(buildDotView).toList(),
+          ),
         ),
       ],
     );

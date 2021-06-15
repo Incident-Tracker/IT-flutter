@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:incident_tracker_flutter/src/controller/post_controller.dart';
 import 'package:incident_tracker_flutter/src/models/post_model.dart';
 import 'package:incident_tracker_flutter/src/pages/detail_page.dart';
 import 'package:incident_tracker_flutter/src/pages/mixin/small_category.dart';

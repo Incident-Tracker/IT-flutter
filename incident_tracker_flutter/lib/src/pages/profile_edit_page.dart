@@ -13,6 +13,7 @@ class ProfileEditPage extends StatelessWidget with SmallCategory {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: IncidentTrackerAppbar(),
       body: Obx(
         () => Stack(
@@ -27,12 +28,13 @@ class ProfileEditPage extends StatelessWidget with SmallCategory {
                 });
               },
               child: Container(
+                width: Get.width,
                 height: Get.height / 3.5,
                 color: Colors.black,
                 child: _controller.background.isNotEmpty
                     ? Image.file(
                         File(_controller.background),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       )
                     : null,
               ),

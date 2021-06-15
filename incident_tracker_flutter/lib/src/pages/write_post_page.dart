@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,6 +22,7 @@ class WritePostPage extends StatelessWidget with SmallCategory {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
           children: [
@@ -39,6 +39,7 @@ class WritePostPage extends StatelessWidget with SmallCategory {
       onTap: getImage,
       child: Obx(
         () => Container(
+          width: Get.width,
           height: Get.height * 0.28,
           color: Colors.grey,
           child: _imagePath.value.isNotEmpty
@@ -134,26 +135,13 @@ class WritePostPage extends StatelessWidget with SmallCategory {
         titleEditController.text,
         DateFormat('yyyy.MM.dd').format(DateTime.now()),
         _profileController.name,
-        _categoryController.getSelectedCategory(),
+        _categoryController.getSkippedSelectedCategory(),
         true,
         0,
         0,
         contentEditController.text,
       );
       _postController.savePost(post);
-
-      // try {
-      //   Map<String, String> map = {
-      //     'title': titleEditController.text,
-      //     'description': contentEditController.text,
-      //     'thumnail': _imagePath.value.split('/').last,
-      //     'category': _categoryController.getSelectedCategory(),
-      //   };
-      //   var dio = Dio()..interceptors.add(LogInterceptor());
-      //   dio.post('http://10.156.145.205:8001/post', data: map).then(print);
-      // } catch (e) {
-      //   print(e);
-      // }
 
       Get.back();
     } else {

@@ -15,12 +15,13 @@ class ProfilePage extends StatelessWidget with SmallCategory {
       () => Stack(
         children: [
           Container(
+            width: Get.width,
             height: Get.height / 3.5,
             color: Colors.black,
             child: _controller.background.isNotEmpty
                 ? Image.file(
                     File(_controller.background),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   )
                 : null,
           ),

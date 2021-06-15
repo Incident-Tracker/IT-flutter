@@ -14,8 +14,7 @@ class PostController extends GetxController {
         false,
         44,
         444,
-        '3'
-    ),
+        '3'),
     PostModel(
       'https://images-ext-2.discordapp.net/external/_XTqz75W4xFXCFr3vTlAOCM2o9XlnjpApzU42wuRAVg/https/pds.joins.com/news/component/htmlphoto_mmdata/202006/26/59afbb36-7eb3-449b-a3e9-462861c19b74.jpg',
       '아이즈원 해체 반대',
@@ -41,17 +40,27 @@ class PostController extends GetxController {
   ].obs;
 
   PostController() {
-    for(var i = 0; i < postBox.length; i++) {
+    for (var i = 0; i < postBox.length; i++) {
       postList.add(postBox.getAt(i));
     }
   }
 
   List<PostModel> getLikeSortedList() {
-    return List.of(postList)..sort((a, b) => a.likeCount >= b.likeCount ? -1 : 1);
+    return List.of(postList)
+      ..sort((a, b) => a.likeCount >= b.likeCount ? -1 : 1);
   }
 
   List<PostModel> getViewSortedList() {
-    return List.of(postList)..sort((a, b) => a.viewsCount >= b.viewsCount ? -1 : 1);
+    return List.of(postList)
+      ..sort((a, b) => a.viewsCount >= b.viewsCount ? -1 : 1);
+  }
+
+  List<PostModel> getMixSortedList() {
+    return List.of(postList)
+      ..sort((a, b) =>
+          a.viewsCount + a.likeCount * 10 >= b.viewsCount + b.likeCount * 10
+              ? -1
+              : 1);
   }
 
   void savePost(PostModel post) {
